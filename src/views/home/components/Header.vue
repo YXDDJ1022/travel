@@ -10,9 +10,11 @@
       <span class="iconfont icon-sousuo"></span>
     </div>
     <!-- 城市 -->
-    <div class="header-right">
-      {{ city }}<span class="iconfont icon-jiantou_yemian_xiangxia_o arrow-icon"></span>
-    </div>
+    <router-link to="/city">
+      <div class="header-right">
+        {{ city }}<span class="iconfont icon-jiantou_yemian_xiangxia_o arrow-icon"></span>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -29,8 +31,8 @@ export default {
 @import '~styles@/varibles.styl';
 
   .header
-    height: .86rem
-    line-height: .86rem
+    height: $headerHeight
+    line-height: $headerHeight
     display: flex
     color: #fff
     background-color $bgColor
@@ -55,6 +57,7 @@ export default {
       width: 1.24rem
       float: right
       text-align: center
+      color: #fff
       .arrow-icon
         font-size: .36rem
         margin-left: -.09rem
