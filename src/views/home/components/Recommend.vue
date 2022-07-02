@@ -18,30 +18,8 @@
 <script>
 export default {
   name: 'home-recommend',
-  data () {
-    return {
-      // 数据源
-      recommendList: [
-        {
-          id: '00001',
-          imgUrl: 'http://img1.qunarzz.com/sight/p0/1506/f6/f6b727f036fe5d6d.water.jpg_200x200_a3c26b4d.jpg',
-          title: '鼓浪屿',
-          desc: '鼓浪屿是一个宁静美丽的小岛，凭借其独特的景色，已然成为厦门名副其实的旅游名片。岛上有日光岩、菽庄花园、风琴博物馆等景点，在日光岩内，可以俯视全岛，将景色尽收眼底。'
-        },
-        {
-          id: '00002',
-          imgUrl: 'http://img1.qunarzz.com/sight/p0/1506/f6/f6b727f036fe5d6d.water.jpg_200x200_a3c26b4d.jpg',
-          title: '鼓浪屿',
-          desc: '鼓浪屿是一个宁静美丽的小岛，凭借其独特的景色，已然成为厦门名副其实的旅游名片。岛上有日光岩、菽庄花园、风琴博物馆等景点，在日光岩内，可以俯视全岛，将景色尽收眼底。'
-        },
-        {
-          id: '00003',
-          imgUrl: 'http://img1.qunarzz.com/sight/p0/1506/f6/f6b727f036fe5d6d.water.jpg_200x200_a3c26b4d.jpg',
-          title: '鼓浪屿',
-          desc: '鼓浪屿是一个宁静美丽的小岛，凭借其独特的景色，已然成为厦门名副其实的旅游名片。岛上有日光岩、菽庄花园、风琴博物馆等景点，在日光岩内，可以俯视全岛，将景色尽收眼底。'
-        }
-      ]
-    }
+  props: {
+    recommendList: Array
   }
 }
 </script>

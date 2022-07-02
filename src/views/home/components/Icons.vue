@@ -1,7 +1,7 @@
 /* 功能图标 */
 <template>
   <div class="icons">
-    <swiper>
+    <swiper :options="swiperOption">
       <swiper-slide v-for="(page, index) of pages" :key="index">
         <div class="icon" v-for="item of page" :key="item.id">
           <div class="icon-img">
@@ -17,55 +17,15 @@
 <script>
 export default {
   name: 'home-icons',
+  props: {
+    iconList: Array
+  },
   data () {
     return {
-      iconList: [
-        {
-          id: '00001',
-          imgUrl: 'https://s.qunarzz.com/homenode/images/touchheader/hotel.png',
-          desc: '酒店'
-        },
-        {
-          id: '00002',
-          imgUrl: 'https://s.qunarzz.com/homenode/images/touchheader/flight.png',
-          desc: '机票'
-        },
-        {
-          id: '00003',
-          imgUrl: 'https://s.qunarzz.com/homenode/images/touchheader/train.png',
-          desc: '火车票'
-        },
-        {
-          id: '00004',
-          imgUrl: 'https://s.qunarzz.com/homenode/images/touchheader/package.png',
-          desc: '度假'
-        },
-        {
-          id: '00005',
-          imgUrl: 'https://s.qunarzz.com/homenode/images/touchheader/piao.png',
-          desc: '景点门票'
-        },
-        {
-          id: '00006',
-          imgUrl: 'https://picbed.qunarzz.com/f5e5770393d759578962e53ee67798c8.png',
-          desc: '海外酒店'
-        },
-        {
-          id: '00007',
-          imgUrl: 'https://picbed.qunarzz.com/a36d2288f19e54562338f4d8ef986288.png',
-          desc: '低价机票'
-        },
-        {
-          id: '00008',
-          imgUrl: 'https://picbed.qunarzz.com/ae617a31e0bd5803d76918b817f6d942.png',
-          desc: '自由行'
-        },
-        {
-          id: '00009',
-          imgUrl: 'https://picbed.qunarzz.com/ae617a31e0bd5803d76918b817f6d942.png',
-          desc: '自由行'
-        }
-      ]
+      // vue-awesome-swiper插件的配置选项
+      swiperOption: {
+        autoplay: false // 关闭自动滚动
+      }
     }
   },
   computed: {

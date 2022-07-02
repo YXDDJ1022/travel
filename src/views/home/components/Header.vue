@@ -11,14 +11,17 @@
     </div>
     <!-- 城市 -->
     <div class="header-right">
-      城市<span class="iconfont icon-jiantou_yemian_xiangxia_o arrow-icon"></span>
+      {{ city }}<span class="iconfont icon-jiantou_yemian_xiangxia_o arrow-icon"></span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home-header'
+  name: 'home-header',
+  props: {
+    city: String
+  }
 }
 </script>
 
