@@ -7,6 +7,7 @@ import './assets/iconfont/iconfont.css' // icon字体图标
 import fastclick from 'fastclick' // 解决移动端click点击事件300ms延迟问题
 import swiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+import 'spacingjs/dist/bundle'
 
 fastclick.attach(document.body)
 Vue.use(swiper)

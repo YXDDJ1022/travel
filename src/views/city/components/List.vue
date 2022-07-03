@@ -21,9 +21,9 @@
         </div>
       </div>
       <!-- 所有城市 -->
-      <div class="area" v-for="(value, key) in cities" :key="key">
+      <div class="area" v-for="(value, key) in cities" :key="key" :ref="key">
         <!-- 开头字母 -->
-        <div class="title border-topbottom">{{ key }}</div>
+        <div class="title border-topbottom" >{{ key }}</div>
         <!-- 当前字母下的所有城市 -->
         <div class="item-list">
           <div class="item border-bottom" v-for="item of value" :key="item.id">{{ item.name }}</div>
@@ -40,7 +40,8 @@ export default {
   name: 'city-list',
   props: {
     cities: Object, // 所有城市
-    hotCities: Array // 热门城市
+    hotCities: Array, // 热门城市
+    letter: String // 城市字母
   },
   watch: {
     // 当获取到所有城市数据并且等页面结构渲染完成后，生成滚动条
@@ -49,6 +50,12 @@ export default {
         this.$nextTick(() => {
           this.scroll = new BScroll(this.$refs.list)
         })
+      }
+    },
+    // 滚动到指定节点位置
+    letter (newVal) {
+      if (newVal) {
+        this.scroll.scrollToElement(this.$refs[newVal][0])
       }
     }
   }

@@ -6,9 +6,9 @@
     <!-- 搜索框 -->
     <city-search></city-search>
     <!-- 城市 -->
-    <city-list :cities="cities" :hotCities="hotCities"></city-list>
+    <city-list :cities="cities" :hotCities="hotCities" :letter="letter"></city-list>
     <!-- 字母表 -->
-    <city-alphabet :cities="cities"></city-alphabet>
+    <city-alphabet @change="handleLetterChange" :cities="cities"></city-alphabet>
   </div>
 </template>
 
@@ -30,10 +30,14 @@ export default {
   data () {
     return {
       cities: null, // 所有城市
-      hotCities: [] // 热门城市
+      hotCities: [], // 热门城市
+      letter: ''
     }
   },
   methods: {
+    handleLetterChange (key) {
+      this.letter = key
+    },
     /**
      * @description 获取城市数据
      */
