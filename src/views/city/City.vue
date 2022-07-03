@@ -1,17 +1,19 @@
+/* 选择城市页面 */
 <template>
   <div>
     <!-- 头部 -->
     <city-header></city-header>
     <!-- 搜索框 -->
     <city-search></city-search>
-    <!--  -->
-    <city-list></city-list>
+    <!-- 城市 -->
+    <city-list :cities="cities" :hotCities="hotCities"></city-list>
     <!-- 字母表 -->
-    <city-alphabet></city-alphabet>
+    <city-alphabet :cities="cities"></city-alphabet>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import CityHeader from './components/Header.vue'
 import CitySearch from './components/Search.vue'
 import CityList from './components/List.vue'
@@ -24,6 +26,26 @@ export default {
     CitySearch,
     CityList,
     CityAlphabet
+  },
+  data () {
+    return {
+      cities: null, // 所有城市
+      hotCities: [] // 热门城市
+    }
+  },
+  methods: {
+    /**
+     * @description 获取城市数据
+     */
+    getCityInfo () {
+      axios.get('/api/city.json').then(res => {
+        const data = res.data.data;
+        ({ cities: this.cities, hotCities: this.hotCities } = data)
+      })
+    }
+  },
+  mounted () {
+    this.getCityInfo()
   }
 }
 </script>

@@ -1,17 +1,16 @@
+/* 字母表 */
 <template>
   <ul class="list">
-    <li class="item">A</li>
-    <li class="item">A</li>
-    <li class="item">A</li>
-    <li class="item">A</li>
-    <li class="item">A</li>
-    <li class="item">A</li>
+    <li class="item" v-for="(value, key) in cities" :key="key">{{ key }}</li>
   </ul>
 </template>
 
 <script>
 export default {
-  name: 'city-alphabet'
+  name: 'city-alphabet',
+  props: {
+    cities: Object // 所有城市
+  }
 }
 </script>
 

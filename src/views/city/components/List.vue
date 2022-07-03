@@ -1,6 +1,8 @@
+/* 城市 */
 <template>
   <div class="list" ref="list">
     <div>
+      <!-- 当前城市 -->
       <div class="area">
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
@@ -9,54 +11,22 @@
           </div>
         </div>
       </div>
+      <!-- 热门城市 -->
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
         <div class="button-list">
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-          <div class="button-wrapper">
-            <div class="button">北京</div>
+          <div class="button-wrapper" v-for="item of hotCities" :key="item.id">
+            <div class="button">{{ item.name }}</div>
           </div>
         </div>
       </div>
-      <div class="area">
-        <div class="title border-topbottom">A</div>
+      <!-- 所有城市 -->
+      <div class="area" v-for="(value, key) in cities" :key="key">
+        <!-- 开头字母 -->
+        <div class="title border-topbottom">{{ key }}</div>
+        <!-- 当前字母下的所有城市 -->
         <div class="item-list">
-          <div class="item border-bottom">a</div>
-          <div class="item border-bottom">a</div>
-          <div class="item border-bottom">a</div>
-        </div>
-      </div>
-      <div class="area">
-        <div class="title border-topbottom">B</div>
-        <div class="item-list">
-          <div class="item border-bottom">a</div>
-          <div class="item border-bottom">a</div>
-          <div class="item border-bottom">a</div>
-        </div>
-      </div>
-      <div class="area">
-        <div class="title border-topbottom">C</div>
-        <div class="item-list">
-          <div class="item border-bottom">a</div>
-          <div class="item border-bottom">a</div>
-          <div class="item border-bottom">a</div>
+          <div class="item border-bottom" v-for="item of value" :key="item.id">{{ item.name }}</div>
         </div>
       </div>
     </div>
@@ -68,8 +38,19 @@ import BScroll from 'better-scroll'
 
 export default {
   name: 'city-list',
-  mounted () {
-    this.scroll = new BScroll(this.$refs.list)
+  props: {
+    cities: Object, // 所有城市
+    hotCities: Array // 热门城市
+  },
+  watch: {
+    // 当获取到所有城市数据并且等页面结构渲染完成后，生成滚动条
+    cities (newVal) {
+      if (newVal) {
+        this.$nextTick(() => {
+          this.scroll = new BScroll(this.$refs.list)
+        })
+      }
+    }
   }
 }
 </script>
