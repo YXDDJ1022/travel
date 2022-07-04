@@ -41,6 +41,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * @description 获取首页数据
+     */
     getHomeInfo () {
       axios.get('/api/index.json').then(res => {
         const data = res.data.data;

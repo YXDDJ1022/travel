@@ -4,9 +4,9 @@
     <!-- 头部 -->
     <city-header></city-header>
     <!-- 搜索框 -->
-    <city-search></city-search>
+    <city-search :cities="cities"></city-search>
     <!-- 城市 -->
-    <city-list :cities="cities" :hotCities="hotCities" :letter="letter"></city-list>
+    <city-list :city="city" :cities="cities" :hotCities="hotCities" :letter="letter"></city-list>
     <!-- 字母表 -->
     <city-alphabet @change="handleLetterChange" :cities="cities"></city-alphabet>
   </div>
@@ -29,9 +29,10 @@ export default {
   },
   data () {
     return {
+      city: '', // 当前城市
       cities: null, // 所有城市
       hotCities: [], // 热门城市
-      letter: ''
+      letter: '' // 选中的城市字母
     }
   },
   methods: {
@@ -44,7 +45,7 @@ export default {
     getCityInfo () {
       axios.get('/api/city.json').then(res => {
         const data = res.data.data;
-        ({ cities: this.cities, hotCities: this.hotCities } = data)
+        ({ city: this.city, cities: this.cities, hotCities: this.hotCities } = data)
       })
     }
   },

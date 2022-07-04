@@ -7,7 +7,7 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
-            <div class="button">北京</div>
+            <div class="button">{{ city }}</div>
           </div>
         </div>
       </div>
@@ -39,24 +39,17 @@ import BScroll from 'better-scroll'
 export default {
   name: 'city-list',
   props: {
+    city: String, // 当前城市
     cities: Object, // 所有城市
     hotCities: Array, // 热门城市
     letter: String // 城市字母
   },
-  watch: {
-    // 当获取到所有城市数据并且等页面结构渲染完成后，生成滚动条
-    cities (newVal) {
-      if (newVal) {
-        this.$nextTick(() => {
-          this.scroll = new BScroll(this.$refs.list)
-        })
-      }
-    },
-    // 滚动到指定节点位置
-    letter (newVal) {
-      if (newVal) {
-        this.scroll.scrollToElement(this.$refs[newVal][0])
-      }
+  mounted () {
+    this.scroll = new BScroll(this.$refs.list)
+  },
+  updated () {
+    if (this.city && this.cities && this.hotCities.length > 0) {
+      this.scroll.refresh()
     }
   }
 }
