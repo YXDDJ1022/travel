@@ -8,7 +8,7 @@
     <!-- 搜索结果 -->
     <div class="search-content" v-show="keyword" ref="search-result">
       <ul>
-        <li class="search-item border-bottom" v-for="item of list" :key="item.id">{{ item.name }}</li>
+        <li class="search-item border-bottom" @click="handleCityClick(item.name)" v-for="item of list" :key="item.id">{{ item.name }}</li>
         <li class="search-item border-bottom" v-show="!list.length">没有找到匹配数据</li>
       </ul>
     </div>
@@ -17,6 +17,7 @@
 
 <script>
 import BScroll from 'better-scroll'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'city-search',
@@ -56,8 +57,21 @@ export default {
       }, 100)
     }
   },
+  methods: {
+    ...mapMutations(['SET_CITY']),
+    /**
+     * @description 点击某个城市时执行
+     * @param { string } city 城市名称
+     */
+    handleCityClick (city) {
+      this.SET_CITY(city)
+      this.$router.push('/')
+    }
+  },
   mounted () {
-    this.scroll = new BScroll(this.$refs['search-result'])
+    this.scroll = new BScroll(this.$refs['search-result'], {
+      click: true // better-scroll默认禁用了移动端的点击事件，开启
+    })
   }
 }
 </script>

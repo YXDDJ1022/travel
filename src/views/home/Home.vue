@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- 首页的头部 -->
-    <home-header :city="city"></home-header>
+    <home-header></home-header>
     <!-- 轮播图 -->
     <home-swiper :swiperList="swiperList"></home-swiper>
     <!-- 功能 -->
@@ -33,11 +33,10 @@ export default {
   },
   data () {
     return {
-      city: '',
-      swiperList: [],
-      iconList: [],
-      recommendList: [],
-      weekendList: []
+      swiperList: [], // 轮播图
+      iconList: [], // 功能
+      recommendList: [], // 热门推荐
+      weekendList: [] // 周末去哪儿
     }
   },
   methods: {
@@ -48,7 +47,6 @@ export default {
       axios.get('/api/index.json').then(res => {
         const data = res.data.data;
         ({
-          city: this.city,
           swiperList: this.swiperList,
           iconList: this.iconList,
           recommendList: this.recommendList,

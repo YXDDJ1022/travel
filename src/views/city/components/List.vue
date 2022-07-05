@@ -15,7 +15,7 @@
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
         <div class="button-list">
-          <div class="button-wrapper" v-for="item of hotCities" :key="item.id">
+          <div class="button-wrapper" @click="handleCityClick(item.name)" v-for="item of hotCities" :key="item.id">
             <div class="button">{{ item.name }}</div>
           </div>
         </div>
@@ -26,7 +26,7 @@
         <div class="title border-topbottom" >{{ key }}</div>
         <!-- 当前字母下的所有城市 -->
         <div class="item-list">
-          <div class="item border-bottom" v-for="item of value" :key="item.id">{{ item.name }}</div>
+          <div class="item border-bottom" @click="handleCityClick(item.name)" v-for="item of value" :key="item.id">{{ item.name }}</div>
         </div>
       </div>
     </div>
@@ -35,20 +35,44 @@
 
 <script>
 import BScroll from 'better-scroll'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'city-list',
   props: {
-    city: String, // 当前城市
     cities: Object, // 所有城市
     hotCities: Array, // 热门城市
     letter: String // 城市字母
   },
+  computed: {
+    ...mapState(['city'])
+  },
+  methods: {
+    ...mapMutations(['SET_CITY']),
+    /**
+     * @description 点击某个城市时执行
+     * @param { string } city 城市名称
+     */
+    handleCityClick (city) {
+      this.SET_CITY(city)
+      this.$router.push('/')
+    }
+  },
+  watch: {
+    // 滚动到指定节点位置
+    letter (newVal) {
+      if (newVal) {
+        this.scroll.scrollToElement(this.$refs[newVal][0])
+      }
+    }
+  },
   mounted () {
-    this.scroll = new BScroll(this.$refs.list)
+    this.scroll = new BScroll(this.$refs.list, {
+      click: true // better-scroll默认禁用了移动端的点击事件，开启
+    })
   },
   updated () {
-    if (this.city && this.cities && this.hotCities.length > 0) {
+    if (this.$store.state.city && this.cities && this.hotCities.length > 0) {
       this.scroll.refresh()
     }
   }

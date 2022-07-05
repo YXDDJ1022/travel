@@ -6,7 +6,7 @@
     <!-- 搜索框 -->
     <city-search :cities="cities"></city-search>
     <!-- 城市 -->
-    <city-list :city="city" :cities="cities" :hotCities="hotCities" :letter="letter"></city-list>
+    <city-list :cities="cities" :hotCities="hotCities" :letter="letter"></city-list>
     <!-- 字母表 -->
     <city-alphabet @change="handleLetterChange" :cities="cities"></city-alphabet>
   </div>
