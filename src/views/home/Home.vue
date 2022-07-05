@@ -16,6 +16,7 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import HomeHeader from './components/Header.vue'
 import HomeSwiper from './components/Swiper.vue'
 import HomeIcons from './components/Icons.vue'
@@ -36,15 +37,19 @@ export default {
       swiperList: [], // 轮播图
       iconList: [], // 功能
       recommendList: [], // 热门推荐
-      weekendList: [] // 周末去哪儿
+      weekendList: [], // 周末去哪儿
+      lastCity: ''
     }
+  },
+  computed: {
+    ...mapState(['city'])
   },
   methods: {
     /**
      * @description 获取首页数据
      */
     getHomeInfo () {
-      axios.get('/api/index.json').then(res => {
+      axios.get(`/api/index.json?city=${this.city}`).then(res => {
         const data = res.data.data;
         ({
           swiperList: this.swiperList,
@@ -56,7 +61,14 @@ export default {
     }
   },
   mounted () {
+    this.lastCity = this.city
     this.getHomeInfo()
+  },
+  activated () {
+    if (this.lastCity !== this.city) {
+      this.lastCity = this.city
+      this.getHomeInfo()
+    }
   }
 }
 </script>

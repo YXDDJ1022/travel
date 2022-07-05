@@ -11,6 +11,10 @@ const routes = [
   {
     path: '/city',
     component: () => import('../views/city/City.vue')
+  },
+  {
+    path: '/detail/:id',
+    component: () => import('../views/detail/Detail.vue')
   }
 ]
 

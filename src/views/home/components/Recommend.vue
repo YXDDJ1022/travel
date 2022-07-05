@@ -3,7 +3,7 @@
   <div>
     <div class="recommend-title">热门推荐</div>
     <ul>
-      <li class="item border-bottom" v-for="item of recommendList" :key="item.id">
+      <li class="item border-bottom" @click="cityDetail(`/detail/${item.id}`)" v-for="item of recommendList" :key="item.id">
         <img class="item-img" :src="item.imgUrl" alt="">
         <div class="item-info">
           <p class="item-title">{{ item.title }}</p>
@@ -20,6 +20,11 @@ export default {
   name: 'home-recommend',
   props: {
     recommendList: Array
+  },
+  methods: {
+    cityDetail (path) {
+      this.$router.push(path)
+    }
   }
 }
 </script>
