@@ -51,6 +51,9 @@ export default {
   activated () {
     // 注册滚动条滚动事件
     window.addEventListener('scroll', this.handleScroll)
+  },
+  deactivated () {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
@@ -78,6 +81,7 @@ export default {
   position: fixed
   top: 0
   left: 0
+  z-index: 10
   text-align: center
   color: #fff
   background-color $bgColor
