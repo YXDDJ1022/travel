@@ -3,16 +3,16 @@
   <div>
     <!-- 图片 -->
     <div class="banner" @click="handleBannerClick">
-      <img class="banner-img" :src="imgs[0]" alt="">
+      <img class="banner-img" :src="bannerImg" alt="">
       <div class="banner-info">
-        <div class="banner-title">大美山西，表里山河，与历史重逢</div>
+        <div class="banner-title">{{ sightName }}</div>
         <div class="banner-number">
           <i class="iconfont icon-tupian"></i>
           图片</div>
       </div>
     </div>
     <!-- 图片画廊 -->
-    <common-gallary v-show="showGallary" :imgs="imgs" :show-gallary.sync="showGallary"></common-gallary>
+    <common-gallary v-show="showGallary" :imgs="gallaryImgs" :show-gallary.sync="showGallary"></common-gallary>
   </div>
 </template>
 
@@ -23,6 +23,11 @@ export default {
   name: 'detail-banner',
   components: {
     CommonGallary
+  },
+  props: {
+    sightName: String,
+    bannerImg: String,
+    gallaryImgs: Array
   },
   data () {
     return {

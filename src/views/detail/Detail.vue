@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- 横幅 -->
-    <detail-banner></detail-banner>
+    <detail-banner :sightName="sightName" :bannerImg="bannerImg" :gallaryImgs="gallaryImgs"></detail-banner>
     <!-- 头部 -->
     <detail-header></detail-header>
     <div class="content">
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import DetailBanner from './components/Banner.vue'
 import DetailHeader from './components/Header.vue'
 import DetailList from './components/List'
@@ -26,34 +27,32 @@ export default {
   },
   data () {
     return {
-      list: [
-        {
-          title: '成人票',
-          children: [
-            {
-              title: '成人三馆联票',
-              children: [
-                {
-                  title: '成人三馆联票--东东连锁店销售'
-                }
-              ]
-            },
-            {
-              title: '成人五馆联票'
-            }
-          ]
-        },
-        {
-          title: '学生票'
-        },
-        {
-          title: '儿童票'
-        },
-        {
-          title: '特惠票'
-        }
-      ]
+      sightName: '', // 景点名
+      bannerImg: '', // 主图
+      gallaryImgs: [], // 画廊图
+      list: []
     }
+  },
+  methods: {
+    getDetailInfo () {
+      axios.get('/api/detail.json', {
+        params: {
+          id: this.$route.params.id
+        }
+      }).then(res => {
+        console.log(res.data.data)
+        const data = res.data.data;
+        ({
+          sightName: this.sightName,
+          bannerImg: this.bannerImg,
+          gallaryImgs: this.gallaryImgs,
+          categoryList: this.list
+        } = data)
+      })
+    }
+  },
+  mounted () {
+    this.getDetailInfo()
   }
 }
 </script>
