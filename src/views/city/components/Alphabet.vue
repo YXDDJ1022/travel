@@ -1,7 +1,7 @@
 /* 字母表 */
 <template>
   <ul class="list">
-    <li class="item" @click="handleLetterClick(item)" @touchstart="handleTouchStart" @touchmove="handleTouchMove" @touchend="handleTouchEnd" v-for="(item, index) of letters" :key="index" :ref="item">{{ item }}</li>
+    <li class="item" @click="handleLetterClick(item)" @touchstart.prevent="handleTouchStart" @touchmove="handleTouchMove" @touchend="handleTouchEnd" v-for="(item, index) of letters" :key="index" :ref="item">{{ item }}</li>
   </ul>
 </template>
 
