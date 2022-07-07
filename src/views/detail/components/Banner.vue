@@ -12,17 +12,21 @@
       </div>
     </div>
     <!-- 图片画廊 -->
-    <common-gallary v-show="showGallary" :imgs="gallaryImgs" :show-gallary.sync="showGallary"></common-gallary>
+    <fade-animation>
+      <common-gallary v-show="showGallary" :imgs="gallaryImgs" :show-gallary.sync="showGallary"></common-gallary>
+    </fade-animation>
   </div>
 </template>
 
 <script>
 import CommonGallary from '@/common/gallary/Gallary.vue'
+import FadeAnimation from '@/common/fade/FadeAnimation.vue'
 
 export default {
   name: 'detail-banner',
   components: {
-    CommonGallary
+    CommonGallary,
+    FadeAnimation
   },
   props: {
     sightName: String,
@@ -31,12 +35,6 @@ export default {
   },
   data () {
     return {
-      // 图片数据源
-      imgs: [
-        'https://tr-osdcp.qunarzz.com/tr-osd-vs-dapp-ugc/img/24490c207f818119f3541b7bc48d9da9.jpg',
-        'https://tr-osdcp.qunarzz.com/tr-osd-vs-dapp-ugc/img/441e13aef8edd94ebe4e1c665bf1f62e.jpg',
-        'https://tr-osdcp.qunarzz.com/tr-osd-vs-dapp-ugc/img/be049a68a045fa43ecc1044e5bbbd343.jpg'
-      ],
       showGallary: false // 控制图片画廊组件的显示与隐藏
     }
   },

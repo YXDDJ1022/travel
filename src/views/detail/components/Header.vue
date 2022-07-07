@@ -38,7 +38,7 @@ export default {
      * @description 滚动条滚动事件处理函数
      */
     handleScroll () {
-      const top = document.documentElement.scrollTop
+      const top = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
       this.showAbs = !(top > 60)
       if (top > 60 && top < 140) {
         const opacity = top / 140
@@ -48,11 +48,11 @@ export default {
       }
     }
   },
-  activated () {
+  mounted () {
     // 注册滚动条滚动事件
     window.addEventListener('scroll', this.handleScroll)
   },
-  deactivated () {
+  destroyed () {
     window.removeEventListener('scroll', this.handleScroll)
   }
 }

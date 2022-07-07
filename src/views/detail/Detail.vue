@@ -19,7 +19,7 @@ import DetailHeader from './components/Header.vue'
 import DetailList from './components/List'
 
 export default {
-  name: 'detail',
+  name: 'Detail',
   components: {
     DetailBanner,
     DetailHeader,
@@ -40,7 +40,6 @@ export default {
           id: this.$route.params.id
         }
       }).then(res => {
-        console.log(res.data.data)
         const data = res.data.data;
         ({
           sightName: this.sightName,
